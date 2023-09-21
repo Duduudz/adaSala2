@@ -2,21 +2,23 @@ package com.ada.desafio.entities;
 
 import com.ada.desafio.entities.enums.FeedbackStatusEnum;
 import com.ada.desafio.entities.enums.FeedbackTypeEnum;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Table(name="Feedbacks")
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class FeedbackEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private FeedbackTypeEnum type;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String type;
     private String message;
-    private FeedbackStatusEnum status;
+    private String status;
 }
