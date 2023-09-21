@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value= "/feedback/postInQueue")
 public class SendToCorrespondingQueue {
     @PostMapping
-    public String SendToQueu(){
+    public String SendToQueue(){
         String status = "Sucesso";
 
         //TODO Classe para implementacao da informacao na fila
