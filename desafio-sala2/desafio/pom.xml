@@ -54,6 +54,24 @@
 			<artifactId>spring-cloud-starter-aws-messaging</artifactId>
 			<version>2.2.6.RELEASE</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-sns -->
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-sns</artifactId>
+			<version>1.12.182</version>
+		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+			<version>1.12.551</version>
+		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-core</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>

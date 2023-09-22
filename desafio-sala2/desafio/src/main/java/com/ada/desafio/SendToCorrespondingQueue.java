@@ -1,5 +1,6 @@
 package com.ada.desafio;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,11 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class SendToCorrespondingQueue {
     @PostMapping
     public String SendToQueue(){
-        String status = "Sucesso";
+        return "success";
+    }
 
-        //TODO Classe para implementacao da informacao na fila
-
-        return status;
+    @GetMapping
+    public String GetQueue() {
+        return "Success";
     }
 
 }
