@@ -1,5 +1,6 @@
 package com.ada.desafio.controllers;
 
+import com.ada.desafio.aws.TopicPublisher;
 import com.ada.desafio.entities.CustomeFeedback;
 import com.ada.desafio.entities.enums.FeedbackStatusEnum;
 import com.ada.desafio.repositories.FeedbackRepository;
@@ -22,8 +23,14 @@ public class FeedbackController {
 
   private final FeedbackRepository repository;
 
+  private final TopicPublisher topicPublisher;
+
   FeedbackController(FeedbackRepository repository) {
     this.repository = repository;
+  }
+
+  FeedbackController(TopicPublisher topicPublisher) {
+    this.topicPublisher = topicPublisher;
   }
 
   @GetMapping("/sugestao")
@@ -96,6 +103,11 @@ public class FeedbackController {
   @PostMapping("/feedback")
   CustomeFeedback newFeedbackEntity(@RequestBody CustomeFeedback newCustomeFeedback) {
     return repository.save(newCustomeFeedback);
+  }
+
+  @PostMapping("/awstest")
+  TopicPublisher topicPublisher(@RequestBody CustomeFeedback newCustomeFeedback){
+    return this.topicPublisher(SnsConfig snsConfig, newCustomeFeedback.getType());
   }
 
 }
