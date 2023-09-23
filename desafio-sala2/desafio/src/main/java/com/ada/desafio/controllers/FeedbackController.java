@@ -4,6 +4,7 @@ import com.ada.desafio.dtos.FeedbackDto;
 import com.ada.desafio.entities.FeedbackEntity;
 import com.ada.desafio.entities.enums.FeedbackStatusEnum;
 import com.ada.desafio.entities.enums.FeedbackTypeEnum;
+import com.ada.desafio.repositories.FeedbackRepository;
 import com.ada.desafio.services.FeedbackService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,12 @@ import java.util.List;
 public class FeedbackController {
   @Autowired
   private FeedbackService feedbackService;
+
+  private final FeedbackRepository repository;
+
+  FeedbackController(FeedbackRepository repository) {
+    this.repository = repository;
+  }
 
   @GetMapping("/sugestao")
   public ResponseEntity<List<FeedbackEntity>> getSuggestionFeedbacks() {
@@ -82,4 +89,15 @@ public class FeedbackController {
 
     return ResponseEntity.status(HttpStatus.CREATED).body(savedFeedback);
   }
+
+  @GetMapping("/feedbacks")
+  List<FeedbackEntity> all() {
+    return  repository.findAll();
+  }
+
+  @PostMapping("/feedback")
+  FeedbackEntity newFeedbackEntity(@RequestBody FeedbackEntity newFeedbackEntity) {
+    return repository.save(newFeedbackEntity);
+  }
+
 }

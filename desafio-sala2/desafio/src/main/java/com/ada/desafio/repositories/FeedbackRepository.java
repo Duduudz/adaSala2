@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FeedbackRepository extends JpaRepository<FeedbackEntity, Long> {
+    //FeedbackEntity é o domínio
+    //Long é para o ID.
 }
