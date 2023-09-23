@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CustomeFeedback {
+public class CustomerFeedback {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -20,7 +20,7 @@ public class CustomeFeedback {
     private String message;
     private String status;
 
-    public CustomeFeedback(FeedbackTypeEnum type, FeedbackStatusEnum status, String message) {
+    public CustomerFeedback(FeedbackTypeEnum type, FeedbackStatusEnum status, String message) {
         this.type = String.valueOf(type);
         this.status = String.valueOf(status);
         this.message = message;

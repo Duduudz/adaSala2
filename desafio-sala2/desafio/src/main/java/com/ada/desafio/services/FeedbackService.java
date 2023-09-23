@@ -1,6 +1,6 @@
 package com.ada.desafio.services;
 
-import com.ada.desafio.entities.CustomeFeedback;
+import com.ada.desafio.entities.CustomerFeedback;
 import com.ada.desafio.repositories.FeedbackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +12,10 @@ public class FeedbackService {
   @Autowired
   private FeedbackRepository feedbackRepository;
 
-  public CustomeFeedback save(CustomeFeedback feedback) {
+  public CustomerFeedback save(CustomerFeedback feedback) {
     return feedbackRepository.save(feedback);
   }
-  public List<CustomeFeedback> getAllSuggestionFeedbacks() {
+  public List<CustomerFeedback> getAllSuggestionFeedbacks() {
     return feedbackRepository.findAll();
   }
 }

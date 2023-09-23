@@ -1,8 +1,9 @@
 package com.ada.desafio.controllers;
 
-import com.ada.desafio.entities.CustomeFeedback;
+import com.ada.desafio.entities.CustomerFeedback;
 import com.ada.desafio.entities.enums.FeedbackStatusEnum;
 import com.ada.desafio.repositories.FeedbackRepository;
+import com.ada.desafio.services.FeedbackCriticaPublisherService;
 import com.ada.desafio.services.FeedbackService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class FeedbackController {
   @Autowired
   private FeedbackService feedbackService;
 
+  @Autowired
+  private FeedbackCriticaPublisherService feedbackCriticaPublisherService;
+
   private final FeedbackRepository repository;
 
   FeedbackController(FeedbackRepository repository) {
@@ -27,10 +31,10 @@ public class FeedbackController {
   }
 
   @GetMapping("/sugestao")
-  public ResponseEntity<List<CustomeFeedback>> getSuggestionFeedbacks() {
+  public ResponseEntity<List<CustomerFeedback>> getSuggestionFeedbacks() {
     // TODO - Precisa filtrar somente feedbacks de sugestao
     try {
-      List<CustomeFeedback> suggestionFeedbackList = new ArrayList<>();
+      List<CustomerFeedback> suggestionFeedbackList = new ArrayList<>();
       feedbackService.getAllSuggestionFeedbacks().forEach(suggestionFeedbackList::add);
 
       if (suggestionFeedbackList.isEmpty()) {
@@ -44,10 +48,10 @@ public class FeedbackController {
   }
 
   @GetMapping("/elogio")
-  public ResponseEntity<List<CustomeFeedback>> getPraiseFeedbacks(){
+  public ResponseEntity<List<CustomerFeedback>> getPraiseFeedbacks(){
     // TODO - Precisa filtrar somente feedbacks de elogio
     try {
-      List<CustomeFeedback> praiseFeedbackList = new ArrayList<>();
+      List<CustomerFeedback> praiseFeedbackList = new ArrayList<>();
       feedbackService.getAllSuggestionFeedbacks().forEach(praiseFeedbackList::add);
 
       if (praiseFeedbackList.isEmpty()) {
@@ -61,10 +65,10 @@ public class FeedbackController {
   }
 
   @GetMapping("/critica")
-  public ResponseEntity<List<CustomeFeedback>> getCriticizeFeedbacks(){
+  public ResponseEntity<List<CustomerFeedback>> getCriticizeFeedbacks(){
     // TODO - Precisa filtrar somente feedbacks de criticas
     try {
-      List<CustomeFeedback> criticizeFeedbackList = new ArrayList<>();
+      List<CustomerFeedback> criticizeFeedbackList = new ArrayList<>();
       feedbackService.getAllSuggestionFeedbacks().forEach(criticizeFeedbackList::add);
 
       if (criticizeFeedbackList.isEmpty()) {
@@ -78,24 +82,25 @@ public class FeedbackController {
   }
 
   @PostMapping()
-  public ResponseEntity<Object> saveFeedback(@RequestBody CustomeFeedback feedback) {
-    var feedbackEntity = new CustomeFeedback();
+  public ResponseEntity<Object> saveFeedback(@RequestBody CustomerFeedback feedback) {
+    var feedbackEntity = new CustomerFeedback();
     BeanUtils.copyProperties(feedback, feedbackEntity);
     feedbackEntity.setStatus(String.valueOf(FeedbackStatusEnum.RECEBIDO));
 
-    CustomeFeedback savedFeedback = feedbackService.save(feedbackEntity);
+    CustomerFeedback savedFeedback = feedbackService.save(feedbackEntity);
 
     return ResponseEntity.status(HttpStatus.CREATED).body(savedFeedback);
   }
 
   @GetMapping("/feedbacks")
-  List<CustomeFeedback> all() {
+  List<CustomerFeedback> all() {
     return  repository.findAll();
   }
 
   @PostMapping("/feedback")
-  CustomeFeedback newFeedbackEntity(@RequestBody CustomeFeedback newCustomeFeedback) {
-    return repository.save(newCustomeFeedback);
+  CustomerFeedback newFeedbackEntity(@RequestBody CustomerFeedback newCustomerFeedback) {
+    feedbackCriticaPublisherService.publishFeedbackCritica(newCustomerFeedback.getMessage());
+    return repository.save(newCustomerFeedback);
   }
 
 }

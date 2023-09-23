@@ -1,5 +1,5 @@
 package com.ada.desafio;
-import com.ada.desafio.entities.CustomeFeedback;
+import com.ada.desafio.entities.CustomerFeedback;
 import com.ada.desafio.entities.enums.FeedbackStatusEnum;
 import com.ada.desafio.entities.enums.FeedbackTypeEnum;
 import com.ada.desafio.repositories.FeedbackRepository;
@@ -20,9 +20,9 @@ class LoadMockTestDB {
     @Bean
     CommandLineRunner initFeedbackDB(FeedbackRepository repository) {
         return args -> {
-            log.info("Preloading " + repository.save(new CustomeFeedback(FeedbackTypeEnum.CRITICA, FeedbackStatusEnum.EM_PROCESSAMENTO, "ISSO É UMA CRÍTICA")));
-            log.info("Preloading " + repository.save(new CustomeFeedback(FeedbackTypeEnum.SUGESTAO,FeedbackStatusEnum.EM_PROCESSAMENTO, "ISSO É UMA SUGESTÃO")));
-            log.info("Preloading " + repository.save(new CustomeFeedback(FeedbackTypeEnum.ELOGIO, FeedbackStatusEnum.EM_PROCESSAMENTO, "ISSO É UM ELOGIO")));
+            log.info("Preloading " + repository.save(new CustomerFeedback(FeedbackTypeEnum.CRITICA, FeedbackStatusEnum.EM_PROCESSAMENTO, "ISSO É UMA CRÍTICA")));
+            log.info("Preloading " + repository.save(new CustomerFeedback(FeedbackTypeEnum.SUGESTAO,FeedbackStatusEnum.EM_PROCESSAMENTO, "ISSO É UMA SUGESTÃO")));
+            log.info("Preloading " + repository.save(new CustomerFeedback(FeedbackTypeEnum.ELOGIO, FeedbackStatusEnum.EM_PROCESSAMENTO, "ISSO É UM ELOGIO")));
         };
     }
 }
