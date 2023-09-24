@@ -1,0 +1,4 @@
+com/ada/desafio/config/AwsSqsConfig.class
+com/ada/desafio/services/SnsService.class
+com/ada/desafio/config/AwsSnsConfig.class
+com/ada/desafio/entities/CustomerFeedback.class
