@@ -5,6 +5,7 @@ import com.ada.desafio.entities.enums.FeedbackStatusEnum;
 import com.ada.desafio.repositories.FeedbackRepository;
 import com.ada.desafio.services.FeedbackCriticaPublisherService;
 import com.ada.desafio.services.FeedbackService;
+import com.ada.desafio.services.SnsService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,11 @@ public class FeedbackController {
 
   private final FeedbackRepository repository;
 
-  FeedbackController(FeedbackRepository repository) {
+  private final SnsService snsService;
+
+  @Autowired
+  FeedbackController(SnsService snsService, FeedbackRepository repository) {
+    this.snsService = snsService;
     this.repository = repository;
   }
 
@@ -81,26 +86,31 @@ public class FeedbackController {
     }
   }
 
-  @PostMapping()
-  public ResponseEntity<Object> saveFeedback(@RequestBody CustomerFeedback feedback) {
-    var feedbackEntity = new CustomerFeedback();
-    BeanUtils.copyProperties(feedback, feedbackEntity);
-    feedbackEntity.setStatus(String.valueOf(FeedbackStatusEnum.RECEBIDO));
-
-    CustomerFeedback savedFeedback = feedbackService.save(feedbackEntity);
-
-    return ResponseEntity.status(HttpStatus.CREATED).body(savedFeedback);
-  }
 
   @GetMapping("/feedbacks")
   List<CustomerFeedback> all() {
     return  repository.findAll();
   }
 
-  @PostMapping("/feedback")
-  CustomerFeedback newFeedbackEntity(@RequestBody CustomerFeedback newCustomerFeedback) {
-    feedbackCriticaPublisherService.publishFeedbackCritica(newCustomerFeedback.getMessage());
-    return repository.save(newCustomerFeedback);
-  }
+  @PostMapping()
+  String addNewFeedback(@RequestBody CustomerFeedback newCustomerFeedback) {
+    String feedbackType = newCustomerFeedback.getType();
+    String feedbackMessage = newCustomerFeedback.getMessage();
 
+    return switch (feedbackType) {
+      case "CRITICA" -> {
+        repository.save(newCustomerFeedback);
+        yield snsService.publishFeedbackCriticaTopic((feedbackMessage));
+      }
+      case "ELOGIO" -> {
+        repository.save(newCustomerFeedback);
+        yield snsService.publishFeedbackElogioTopic((feedbackMessage));
+      }
+      case "SUGESTAO" -> {
+        repository.save(newCustomerFeedback);
+        yield snsService.publishFeedbackSugestaoTopic((feedbackMessage));
+      }
+      default -> "O tipo de feedback deve ser 'CRITICA', 'ELOGIO' ou 'SUGESTAO'";
+    };
+  };
 }

@@ -34,7 +34,7 @@ public class SnsConfig {
      return topic;
   }
 
-  @Bean
+//  @Bean
   public AmazonSNS snsClient() {
     return AmazonSNSClientBuilder.standard()
             .withRegion(awsRegion)
