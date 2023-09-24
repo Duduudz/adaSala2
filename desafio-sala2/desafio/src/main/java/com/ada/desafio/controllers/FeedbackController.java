@@ -1,10 +1,9 @@
 package com.ada.desafio.controllers;
 
-import com.ada.desafio.entities.CustomeFeedback;
-import com.ada.desafio.entities.enums.FeedbackStatusEnum;
+import com.ada.desafio.entities.CustomerFeedback;
 import com.ada.desafio.repositories.FeedbackRepository;
 import com.ada.desafio.services.FeedbackService;
-import org.springframework.beans.BeanUtils;
+import com.ada.desafio.services.SnsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RequestMapping("/feedback")
 public class FeedbackController {
   @Autowired
@@ -22,15 +21,19 @@ public class FeedbackController {
 
   private final FeedbackRepository repository;
 
-  FeedbackController(FeedbackRepository repository) {
+  private final SnsService snsService;
+
+  @Autowired
+  FeedbackController(SnsService snsService, FeedbackRepository repository) {
+    this.snsService = snsService;
     this.repository = repository;
   }
 
   @GetMapping("/sugestao")
-  public ResponseEntity<List<CustomeFeedback>> getSuggestionFeedbacks() {
+  public ResponseEntity<List<CustomerFeedback>> getSuggestionFeedbacks() {
     // TODO - Precisa filtrar somente feedbacks de sugestao
     try {
-      List<CustomeFeedback> suggestionFeedbackList = new ArrayList<>();
+      List<CustomerFeedback> suggestionFeedbackList = new ArrayList<>();
       feedbackService.getAllSuggestionFeedbacks().forEach(suggestionFeedbackList::add);
 
       if (suggestionFeedbackList.isEmpty()) {
@@ -44,10 +47,10 @@ public class FeedbackController {
   }
 
   @GetMapping("/elogio")
-  public ResponseEntity<List<CustomeFeedback>> getPraiseFeedbacks(){
+  public ResponseEntity<List<CustomerFeedback>> getPraiseFeedbacks(){
     // TODO - Precisa filtrar somente feedbacks de elogio
     try {
-      List<CustomeFeedback> praiseFeedbackList = new ArrayList<>();
+      List<CustomerFeedback> praiseFeedbackList = new ArrayList<>();
       feedbackService.getAllSuggestionFeedbacks().forEach(praiseFeedbackList::add);
 
       if (praiseFeedbackList.isEmpty()) {
@@ -61,10 +64,10 @@ public class FeedbackController {
   }
 
   @GetMapping("/critica")
-  public ResponseEntity<List<CustomeFeedback>> getCriticizeFeedbacks(){
+  public ResponseEntity<List<CustomerFeedback>> getCriticizeFeedbacks(){
     // TODO - Precisa filtrar somente feedbacks de criticas
     try {
-      List<CustomeFeedback> criticizeFeedbackList = new ArrayList<>();
+      List<CustomerFeedback> criticizeFeedbackList = new ArrayList<>();
       feedbackService.getAllSuggestionFeedbacks().forEach(criticizeFeedbackList::add);
 
       if (criticizeFeedbackList.isEmpty()) {
@@ -77,25 +80,58 @@ public class FeedbackController {
     }
   }
 
-  @PostMapping()
-  public ResponseEntity<Object> saveFeedback(@RequestBody CustomeFeedback feedback) {
-    var feedbackEntity = new CustomeFeedback();
-    BeanUtils.copyProperties(feedback, feedbackEntity);
-    feedbackEntity.setStatus(String.valueOf(FeedbackStatusEnum.RECEBIDO));
-
-    CustomeFeedback savedFeedback = feedbackService.save(feedbackEntity);
-
-    return ResponseEntity.status(HttpStatus.CREATED).body(savedFeedback);
-  }
 
   @GetMapping("/feedbacks")
-  List<CustomeFeedback> all() {
+  List<CustomerFeedback> all() {
     return  repository.findAll();
   }
 
-  @PostMapping("/feedback")
-  CustomeFeedback newFeedbackEntity(@RequestBody CustomeFeedback newCustomeFeedback) {
-    return repository.save(newCustomeFeedback);
-  }
+  @PostMapping()
+  CustomerFeedback addNewFeedback(@RequestBody CustomerFeedback newCustomerFeedback) {
+    String type = newCustomerFeedback.getType();
+    String message = newCustomerFeedback.getMessage();
 
+    return switch (type) {
+      case "CRITICA" -> {
+        String messageId = snsService.publishFeedbackCriticaTopic((message));
+
+        CustomerFeedback feedbackWithMessageID = new CustomerFeedback();
+        feedbackWithMessageID.setType(type);
+        feedbackWithMessageID.setMessage(message);
+        feedbackWithMessageID.setStatus("RECEBIDO");
+        feedbackWithMessageID.setMessageId(messageId);
+
+        repository.save(feedbackWithMessageID);
+
+        yield feedbackWithMessageID;
+      }
+      case "ELOGIO" -> {
+        String messageId = snsService.publishFeedbackElogioTopic((message));
+
+        CustomerFeedback feedbackWithMessageID = new CustomerFeedback();
+        feedbackWithMessageID.setType(type);
+        feedbackWithMessageID.setMessage(message);
+        feedbackWithMessageID.setStatus("RECEBIDO");
+        feedbackWithMessageID.setMessageId(messageId);
+
+        repository.save(feedbackWithMessageID);
+
+        yield feedbackWithMessageID;
+      }
+      case "SUGESTAO" -> {
+        String messageId = snsService.publishFeedbackSugestaoTopic((message));
+
+        CustomerFeedback feedbackWithMessageID = new CustomerFeedback();
+        feedbackWithMessageID.setType(type);
+        feedbackWithMessageID.setMessage(message);
+        feedbackWithMessageID.setStatus("RECEBIDO");
+        feedbackWithMessageID.setMessageId(messageId);
+
+        repository.save(feedbackWithMessageID);
+
+        yield feedbackWithMessageID;
+      }
+      default -> new CustomerFeedback();
+    };
+  };
 }
