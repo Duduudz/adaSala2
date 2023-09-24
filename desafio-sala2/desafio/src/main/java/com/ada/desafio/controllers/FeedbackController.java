@@ -87,24 +87,51 @@ public class FeedbackController {
   }
 
   @PostMapping()
-  String addNewFeedback(@RequestBody CustomerFeedback newCustomerFeedback) {
-    String feedbackType = newCustomerFeedback.getType();
-    String feedbackMessage = newCustomerFeedback.getMessage();
+  CustomerFeedback addNewFeedback(@RequestBody CustomerFeedback newCustomerFeedback) {
+    String type = newCustomerFeedback.getType();
+    String message = newCustomerFeedback.getMessage();
 
-    return switch (feedbackType) {
+    return switch (type) {
       case "CRITICA" -> {
-        repository.save(newCustomerFeedback);
-        yield snsService.publishFeedbackCriticaTopic((feedbackMessage));
+        String messageId = snsService.publishFeedbackCriticaTopic((message));
+
+        CustomerFeedback feedbackWithMessageID = new CustomerFeedback();
+        feedbackWithMessageID.setType(type);
+        feedbackWithMessageID.setMessage(message);
+        feedbackWithMessageID.setStatus("RECEBIDO");
+        feedbackWithMessageID.setMessageId(messageId);
+
+        repository.save(feedbackWithMessageID);
+
+        yield feedbackWithMessageID;
       }
       case "ELOGIO" -> {
-        repository.save(newCustomerFeedback);
-        yield snsService.publishFeedbackElogioTopic((feedbackMessage));
+        String messageId = snsService.publishFeedbackElogioTopic((message));
+
+        CustomerFeedback feedbackWithMessageID = new CustomerFeedback();
+        feedbackWithMessageID.setType(type);
+        feedbackWithMessageID.setMessage(message);
+        feedbackWithMessageID.setStatus("RECEBIDO");
+        feedbackWithMessageID.setMessageId(messageId);
+
+        repository.save(feedbackWithMessageID);
+
+        yield feedbackWithMessageID;
       }
       case "SUGESTAO" -> {
-        repository.save(newCustomerFeedback);
-        yield snsService.publishFeedbackSugestaoTopic((feedbackMessage));
+        String messageId = snsService.publishFeedbackSugestaoTopic((message));
+
+        CustomerFeedback feedbackWithMessageID = new CustomerFeedback();
+        feedbackWithMessageID.setType(type);
+        feedbackWithMessageID.setMessage(message);
+        feedbackWithMessageID.setStatus("RECEBIDO");
+        feedbackWithMessageID.setMessageId(messageId);
+
+        repository.save(feedbackWithMessageID);
+
+        yield feedbackWithMessageID;
       }
-      default -> "O tipo de feedback deve ser 'CRITICA', 'ELOGIO' ou 'SUGESTAO'";
+      default -> new CustomerFeedback();
     };
   };
 }
