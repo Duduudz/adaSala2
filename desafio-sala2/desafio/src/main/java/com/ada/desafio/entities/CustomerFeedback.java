@@ -16,6 +16,7 @@ public class CustomerFeedback {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String messageId;
     private String type;
     private String message;
     private String status;

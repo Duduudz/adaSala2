@@ -1,12 +1,9 @@
 package com.ada.desafio.controllers;
 
 import com.ada.desafio.entities.CustomerFeedback;
-import com.ada.desafio.entities.enums.FeedbackStatusEnum;
 import com.ada.desafio.repositories.FeedbackRepository;
-import com.ada.desafio.services.FeedbackCriticaPublisherService;
 import com.ada.desafio.services.FeedbackService;
 import com.ada.desafio.services.SnsService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +18,6 @@ import java.util.List;
 public class FeedbackController {
   @Autowired
   private FeedbackService feedbackService;
-
-  @Autowired
-  private FeedbackCriticaPublisherService feedbackCriticaPublisherService;
 
   private final FeedbackRepository repository;
 
