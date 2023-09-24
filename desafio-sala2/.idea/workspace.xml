@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="80e7319d-561d-4e85-8042-cbc1b78732c0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/desafio/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/HELP.md" beforeDir="false" afterPath="$PROJECT_DIR$/backend/HELP.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/src/main/java/com/ada/desafio/DesafioApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ada/desafio/DesafioApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/src/main/java/com/ada/desafio/LoadMockTestDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ada/desafio/LoadMockTestDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/src/main/java/com/ada/desafio/config/AwsSnsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ada/desafio/config/AwsSnsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/src/main/java/com/ada/desafio/config/AwsSqsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ada/desafio/config/AwsSqsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/src/main/java/com/ada/desafio/config/CorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ada/desafio/config/CorsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/src/main/java/com/ada/desafio/controllers/FeedbackController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ada/desafio/controllers/FeedbackController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/src/main/java/com/ada/desafio/controllers/FeedbackSizeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ada/desafio/controllers/FeedbackSizeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/src/main/java/com/ada/desafio/entities/CustomerFeedback.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ada/desafio/entities/CustomerFeedback.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/src/main/java/com/ada/desafio/entities/FeedbackSize.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ada/desafio/entities/FeedbackSize.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/src/main/java/com/ada/desafio/entities/enums/FeedbackStatusEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ada/desafio/entities/enums/FeedbackStatusEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/src/main/java/com/ada/desafio/entities/enums/FeedbackTypeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ada/desafio/entities/enums/FeedbackTypeEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/src/main/java/com/ada/desafio/repositories/FeedbackRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ada/desafio/repositories/FeedbackRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/src/main/java/com/ada/desafio/services/FeedbackService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ada/desafio/services/FeedbackService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/src/main/java/com/ada/desafio/services/SnsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/ada/desafio/services/SnsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio/src/test/java/com/ada/desafio/DesafioApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/ada/desafio/DesafioApplicationTests.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3
+}]]></component>
+  <component name="ProjectId" id="2VrZB1I9OrTLyA8tidTPBpgkDhJ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "feat/front-integration",
+    "last_opened_file_path": "/Users/feliperosa/studies/ada-cielo/adaSala2/desafio-sala2",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="80e7319d-561d-4e85-8042-cbc1b78732c0" name="Changes" comment="" />
+      <created>1695596023143</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1695596023143</updated>
+      <workItem from="1695596023151" duration="106000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
