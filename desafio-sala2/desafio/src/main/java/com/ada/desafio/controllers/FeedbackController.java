@@ -107,7 +107,7 @@ public class FeedbackController {
 
   @PostMapping("/awstest")
   TopicPublisher topicPublisher(@RequestBody CustomeFeedback newCustomeFeedback){
-    return this.topicPublisher(SnsConfig snsConfig, newCustomeFeedback.getType());
+    return this.topicPublisher();
   }
 
 }
