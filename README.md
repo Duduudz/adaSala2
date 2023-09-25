@@ -97,7 +97,7 @@ yarn start
 
 Herlander Francisco Sanguluvulo da Silva - https://www.linkedin.com/in/herlander-da-silva/
 
-Lucas Paixão
+Lucas Paixão - https://www.linkedin.com/in/lucas-coelho-paixao/
 
 Felipe Maximiliano da Rosa (Back e Front) - https://www.linkedin.com/in/felipemaxrosa
 
