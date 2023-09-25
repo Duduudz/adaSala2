@@ -101,4 +101,4 @@ Lucas Paixão - https://www.linkedin.com/in/lucas-coelho-paixao/
 
 Felipe Maximiliano da Rosa (Back e Front) - https://www.linkedin.com/in/felipemaxrosa
 
-Gustavo S
+Gustavo - https://www.linkedin.com/in/gustavo-santana-1383a716/
